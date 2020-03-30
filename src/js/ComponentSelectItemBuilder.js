@@ -42,17 +42,29 @@ export class ComponentSelectItemBuilder {
 
 
   /**
+   * @param {ViewListHandlerMounter} viewListHandlerMounter
+   * @returns {ComponentSelectItemBuilder}
+   */
+  viewListHandlerMounter(viewListHandlerMounter) {
+    this.__viewListHandlerMounter = viewListHandlerMounter
+    return this
+  }
+
+  /**
    * @return {ComponentSelectItemPublic}
    */
   build() {
     assertType(!isNull(this.__application), 'componentContext node should be set')
     assertType(!isNull(this.__parentNode), 'parentNode node should be set')
     assertType(!isNull(this.__proxyStoreItems), 'proxyStoreItems node should be set')
+    assertType(!isNull(this.__viewListHandlerMounter), 'viewListHandlerMounter node should be set')
+
     return new ComponentSelectItemPublic(
       new ComponentSelectItem(
         this.__application,
         this.__parentNode,
-        this.__proxyStoreItems
+        this.__proxyStoreItems,
+        this.__viewListHandlerMounter
       )
     )
   }
