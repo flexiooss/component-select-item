@@ -1,0 +1,59 @@
+import {TypeCheck} from '@flexio-oss/hotballoon'
+import {assertType, isNode, isNull} from '@flexio-oss/assert'
+import {ComponentSelectItemPublic} from './ComponentSelectItemPublic'
+import {ComponentSelectItem} from './ComponentSelectItem'
+
+export class ComponentSelectItemBuilder {
+  /**
+   * @return {ComponentSelectItemBuilder}
+   */
+  builder() {
+    return new ComponentSelectItemBuilder()
+  }
+
+  /**
+   * @param {HotBalloonApplication} application
+   * @return {ComponentSelectItemBuilder}
+   */
+  application(application) {
+    assertType(TypeCheck.isHotballoonApplication(application), 'ComponentSelectItemBuilder:application: argument should be a HotballoonApplication')
+    this.__application = application
+    return this
+  }
+
+  /**
+   * @param {Element} parentNode
+   * @return {ComponentSelectItemBuilder}
+   */
+  parentNode(parentNode) {
+    assertType(isNode(parentNode), 'ComponentSelectItemBuilder:parentNode: argument should be a node')
+    this.__parentNode = parentNode
+    return this
+  }
+
+  /**
+   * @param {ProxyStore<STORE_TYPE, STORE_TYPE_BUILDER, ItemCollection, ItemCollectionBuilder>} proxyStoreItems
+   * @returns {ComponentSelectItemBuilder}
+   */
+  proxyStoreItems(proxyStoreItems) {
+    this.__proxyStoreItems = proxyStoreItems
+    return this
+  }
+
+
+  /**
+   * @return {ComponentSelectItemPublic}
+   */
+  build() {
+    assertType(!isNull(this.__application), 'componentContext node should be set')
+    assertType(!isNull(this.__parentNode), 'parentNode node should be set')
+    assertType(!isNull(this.__proxyStoreItems), 'proxyStoreItems node should be set')
+    return new ComponentSelectItemPublic(
+      new ComponentSelectItem(
+        this.__application,
+        this.__parentNode,
+        this.__proxyStoreItems
+      )
+    )
+  }
+}
