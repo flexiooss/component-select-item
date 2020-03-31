@@ -3,6 +3,13 @@ import {ComponentListHandlerBuilder} from '@flexio-oss/component-list-handler/sr
 import {ViewContainerSelectItem} from '../view/ViewContainerSelectItem'
 
 export class ComponentSelectItem {
+  /**
+   * @param {HotBalloonApplication} application
+   * @param {Element} parentNode
+   * @param {ProxyStore<STORE_TYPE, STORE_TYPE_BUILDER, ItemCollection, ItemCollectionBuilder>} proxyStoreItems
+   * @param {ViewListHandlerMounter} viewListHandlerMounter
+   * @param {Function(ComponentContext, Element[])} onCreateItems
+   */
   constructor(application, parentNode, proxyStoreItems, viewListHandlerMounter, onCreateItems) {
     this.__application = application
     this.__parentNode = parentNode
@@ -14,6 +21,7 @@ export class ComponentSelectItem {
     this.__actions = new ActionsHandler(this.__context.dispatcher())
 
     this.__itemViewContainers = new Map()
+
     this.__buildComponentList()
     this.__setup()
   }

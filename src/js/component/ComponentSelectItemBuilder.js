@@ -7,7 +7,7 @@ export class ComponentSelectItemBuilder {
   /**
    * @return {ComponentSelectItemBuilder}
    */
-  builder() {
+  static builder() {
     return new ComponentSelectItemBuilder()
   }
 
