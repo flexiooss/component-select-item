@@ -15,6 +15,7 @@ const select = ComponentSelectItemBuilder.builder()
         ... DO INTELLIGENT THINGS ...
     })
   })
+  .viewContainerSelectItemBuilder(new ViewContainerSelectItemBuilder())
   .build()
 ```
 

@@ -19,6 +19,7 @@ export class ByPass extends TestCase {
             ... DO INTELLIGENT THINGS ...
         })
       })
+      .viewContainerSelectItemBuilder(new ViewContainerSelectItemBuilder())
       .build()
 
     select.actionSelect().listenWithCallback(action =>{

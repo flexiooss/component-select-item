@@ -2,6 +2,7 @@ import {TypeCheck} from '@flexio-oss/hotballoon'
 import {assertType, isFunction, isNode, isNull} from '@flexio-oss/assert'
 import {ComponentSelectItemPublic} from './ComponentSelectItemPublic'
 import {ComponentSelectItem} from './ComponentSelectItem'
+import {ViewContainerSelectItemBuilder} from '../view/ViewContainerSelectItemBuilder'
 
 export class ComponentSelectItemBuilder {
   /**
@@ -50,6 +51,17 @@ export class ComponentSelectItemBuilder {
   }
 
   /**
+   * @param {ViewContainerSelectItemBuilder} builder
+   * @return {ComponentSelectItemBuilder}
+   */
+  viewContainerSelectItemBuilder(builder){
+    assertType(builder instanceof ViewContainerSelectItemBuilder,
+      'ComponentSelectItemBuilder:parentNode: argument should be an instance of ViewContainerSelectItemBuilder')
+    this.__viewContainerSelectItemBuilder = builder
+    return this
+  }
+
+  /**
    * @param {Function(ComponentContext, Element[])} onCreateItems
    * @returns {ComponentSelectItemBuilder}
    */
@@ -68,6 +80,7 @@ export class ComponentSelectItemBuilder {
     assertType(!isNull(this.__proxyStoreItems), 'proxyStoreItems should be set')
     assertType(!isNull(this.__viewListHandlerMounter), 'viewListHandlerMounter should be set')
     assertType(!isNull(this.__onCreateItems), 'onCreateItems should be set')
+    assertType(!isNull(this.__viewContainerSelectItemBuilder), 'viewContainerSelectItemBuilder should be set')
 
     return new ComponentSelectItemPublic(
       new ComponentSelectItem(
@@ -75,7 +88,8 @@ export class ComponentSelectItemBuilder {
         this.__parentNode,
         this.__proxyStoreItems,
         this.__viewListHandlerMounter,
-        this.__onCreateItems
+        this.__onCreateItems,
+        this.__viewContainerSelectItemBuilder
       )
     )
   }

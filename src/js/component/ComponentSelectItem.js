@@ -9,13 +9,15 @@ export class ComponentSelectItem {
    * @param {ProxyStore<STORE_TYPE, STORE_TYPE_BUILDER, ItemCollection, ItemCollectionBuilder>} proxyStoreItems
    * @param {ViewListHandlerMounter} viewListHandlerMounter
    * @param {Function(ComponentContext, Element[])} onCreateItems
+   * @param {ViewContainerSelectItemBuilder} viewContainerSelectItemBuilder
    */
-  constructor(application, parentNode, proxyStoreItems, viewListHandlerMounter, onCreateItems) {
+  constructor(application, parentNode, proxyStoreItems, viewListHandlerMounter, onCreateItems, viewContainerSelectItemBuilder) {
     this.__application = application
     this.__parentNode = parentNode
     this.__proxyStoreItems = proxyStoreItems
     this.__viewListHandlerMounter = viewListHandlerMounter
     this.__onCreateItems = onCreateItems
+    this.__viewContainerSelectItemBuilder = viewContainerSelectItemBuilder
 
     this.__context = this.__application.addComponentContext()
     this.__actions = new ActionsHandler(this.__context.dispatcher())
@@ -42,9 +44,9 @@ export class ComponentSelectItem {
       const nodes = []
       for (let item of items.elements) {
         const node = this.__componentList.nodeByID(item)
-        const viewContainer = new ViewContainerSelectItem(this.__context, node, this.actionSelect(), item)
-        this.__itemViewContainers.set(item, viewContainer)
+        const viewContainer = this.__viewContainerSelectItemBuilder.build(this.__context, node, this.actionSelect(), item)
         viewContainer.renderAndMount()
+        this.__itemViewContainers.set(item, viewContainer)
         nodes.push(viewContainer.getNode())
       }
       this.__onCreateItems(this.__context, nodes)
