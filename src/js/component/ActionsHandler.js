@@ -1,5 +1,6 @@
 import {assertType} from '@flexio-oss/assert'
 import {TypeCheck, ActionDispatcherBuilder} from '@flexio-oss/hotballoon'
+import {globalFlexioImport} from '@flexio-oss/global-import-registry'
 
 export class ActionsHandler {
   constructor(dispatcher) {

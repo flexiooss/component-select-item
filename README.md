@@ -4,7 +4,7 @@ Basé sur https://github.com/flexiooss/component-list-handler, leve une action q
 
 Utiliser `onCreateItems` pour remplir le noeud
 ```javascript
-const select = ComponentSelectItemBuilder.builder()
+const select = ComponentSuggestionCartoBuilder.builder()
   .application(application)
   .parentNode(node)
   .storeItems(store)
