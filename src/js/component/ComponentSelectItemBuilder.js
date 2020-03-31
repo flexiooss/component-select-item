@@ -63,17 +63,19 @@ export class ComponentSelectItemBuilder {
    * @return {ComponentSelectItemPublic}
    */
   build() {
-    assertType(!isNull(this.__application), 'componentContext node should be set')
-    assertType(!isNull(this.__parentNode), 'parentNode node should be set')
-    assertType(!isNull(this.__proxyStoreItems), 'proxyStoreItems node should be set')
-    assertType(!isNull(this.__viewListHandlerMounter), 'viewListHandlerMounter node should be set')
+    assertType(!isNull(this.__application), 'componentContext should be set')
+    assertType(!isNull(this.__parentNode), 'parentNode should be set')
+    assertType(!isNull(this.__proxyStoreItems), 'proxyStoreItems should be set')
+    assertType(!isNull(this.__viewListHandlerMounter), 'viewListHandlerMounter should be set')
+    assertType(!isNull(this.__onCreateItems), 'onCreateItems should be set')
 
     return new ComponentSelectItemPublic(
       new ComponentSelectItem(
         this.__application,
         this.__parentNode,
         this.__proxyStoreItems,
-        this.__viewListHandlerMounter
+        this.__viewListHandlerMounter,
+        this.__onCreateItems
       )
     )
   }

@@ -3,13 +3,14 @@ import {ComponentListHandlerBuilder} from '@flexio-oss/component-list-handler/sr
 import {ViewContainerSelectItem} from '../view/ViewContainerSelectItem'
 
 export class ComponentSelectItem {
-  constructor(application, parentNode, proxyStoreItems, viewListHandlerMounter) {
+  constructor(application, parentNode, proxyStoreItems, viewListHandlerMounter, onCreateItems) {
     this.__application = application
     this.__parentNode = parentNode
     this.__proxyStoreItems = proxyStoreItems
     this.__viewListHandlerMounter = viewListHandlerMounter
-    this.__context = this.__application.addComponentContext()
+    this.__onCreateItems = onCreateItems
 
+    this.__context = this.__application.addComponentContext()
     this.__actions = new ActionsHandler(this.__context.dispatcher())
 
     this.__itemViewContainers = new Map()
@@ -38,9 +39,7 @@ export class ComponentSelectItem {
         viewContainer.renderAndMount()
         nodes.push(viewContainer.getNode())
       }
-      if (this.__onCreateItems){
-        this.__onCreateItems(this.__context, nodes)
-      }
+      this.__onCreateItems(this.__context, nodes)
     })
 
     this.__componentList.onDeleteItem(items => {
