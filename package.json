@@ -9,7 +9,7 @@
     "@flexio-oss/hotballoon-test-dummies": "1.0.0-dev"
   },
   "dependencies": {
-    "@flexio-oss/component-list-handler": "1.1.0-dev"
+    "@flexio-oss/component-list-handler": "1.2.0-dev"
   },
   "peerDependencies": {
     "@flexio-oss/hotballoon": ">0.0.0",

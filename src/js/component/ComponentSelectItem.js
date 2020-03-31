@@ -1,6 +1,6 @@
 import {ActionsHandler} from './ActionsHandler'
 import {ComponentListHandlerBuilder} from '@flexio-oss/component-list-handler/src/js/component/ComponentListHandlerBuilder'
-import {ViewContainerSelectItem} from './view/ViewContainerSelectItem'
+import {ViewContainerSelectItem} from '../view/ViewContainerSelectItem'
 
 export class ComponentSelectItem {
   constructor(application, parentNode, proxyStoreItems, viewListHandlerMounter) {
@@ -24,17 +24,23 @@ export class ComponentSelectItem {
       .proxyStoreItems(this.__proxyStoreItems)
       .idPrefix('select_item')
       .viewListHandlerMounter(this.__viewListHandlerMounter)
+      .reconcile(false)
       .build()
   }
 
   __setup() {
     this.__componentList.onCreateItem(items => {
-      items.elements().forEach(item => {
+      const nodes = []
+      for (let item of items.elements) {
         const node = this.__componentList.nodeByID(item)
-        const viewContainer = new ViewContainerSelectItem(this.__context, this.__parentNode, this.actionSelect(), item, node)
+        const viewContainer = new ViewContainerSelectItem(this.__context, node, this.actionSelect(), item)
         this.__itemViewContainers.set(item, viewContainer)
         viewContainer.renderAndMount()
-      })
+        nodes.push(viewContainer.getNode())
+      }
+      if (this.__onCreateItems){
+        this.__onCreateItems(this.__context, nodes)
+      }
     })
 
     this.__componentList.onDeleteItem(items => {
@@ -52,5 +58,16 @@ export class ComponentSelectItem {
    */
   actionSelect() {
     return this.__actions.actionSelect()
+  }
+
+  /**
+   * @param {Function(ComponentContext, Element[])} onCreateItems
+   */
+  onCreateItems(onCreateItems) {
+    this.__onCreateItems = onCreateItems
+  }
+
+  remove() {
+    this.__context.remove()
   }
 }

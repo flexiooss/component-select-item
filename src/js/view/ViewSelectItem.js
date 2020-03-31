@@ -1,13 +1,13 @@
-import {View, ViewPublicEventHandler} from '@flexio-oss/hotballoon'
+import {e, View, ViewPublicEventHandler} from '@flexio-oss/hotballoon'
 import {UIEventBuilder} from '@flexio-oss/hotballoon/src/js/HotballoonNodeElement/UIEventBuilder'
 
 const SELECT = 'SELECT_ITEM'
 
 export class ViewSelectItem extends View {
-  constructor(viewContainer, id, node) {
+  constructor(viewContainer, id) {
     super(viewContainer)
     this.__id = id
-    this.__node = node
+    this.__nodeId = `item-${this.__id}`
   }
 
   /**
@@ -19,9 +19,16 @@ export class ViewSelectItem extends View {
     })
   }
 
+  /**
+   * @return {Element}
+   */
+  getNode() {
+    return this.nodeRef(this.__nodeId)
+  }
+
   template() {
     return this.html(
-      this.__node
+      e(`div#${this.__id}`)
         .listenEvent(
           UIEventBuilder
             .mouseEvent()

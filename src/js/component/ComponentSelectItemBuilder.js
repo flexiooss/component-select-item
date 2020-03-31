@@ -1,5 +1,5 @@
 import {TypeCheck} from '@flexio-oss/hotballoon'
-import {assertType, isNode, isNull} from '@flexio-oss/assert'
+import {assertType, isFunction, isNode, isNull} from '@flexio-oss/assert'
 import {ComponentSelectItemPublic} from './ComponentSelectItemPublic'
 import {ComponentSelectItem} from './ComponentSelectItem'
 
@@ -40,13 +40,22 @@ export class ComponentSelectItemBuilder {
     return this
   }
 
-
   /**
    * @param {ViewListHandlerMounter} viewListHandlerMounter
    * @returns {ComponentSelectItemBuilder}
    */
   viewListHandlerMounter(viewListHandlerMounter) {
     this.__viewListHandlerMounter = viewListHandlerMounter
+    return this
+  }
+
+  /**
+   * @param {Function(ComponentContext, Element[])} onCreateItems
+   * @returns {ComponentSelectItemBuilder}
+   */
+  onCreateItems(onCreateItems) {
+    assertType(isFunction(onCreateItems), 'ComponentSelectItemBuilder:parentNode: argument should be a function')
+    this.__onCreateItems = onCreateItems
     return this
   }
 

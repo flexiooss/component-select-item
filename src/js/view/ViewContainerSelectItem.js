@@ -7,10 +7,9 @@ export class ViewContainerSelectItem extends ViewContainer {
    * @param {Element} parentNode
    * @param {ActionDispatcher<ActionSelect, ActionSelectBuilder>} actionSelect
    * @param {string} id
-   * @param {Element} node
    */
-  constructor(context, parentNode, actionSelect, id, node) {
-    const parameters = new ViewContainerParameters(context, `select-item-container-${id}`, parentNode)
+  constructor(context, node, actionSelect, id) {
+    const parameters = new ViewContainerParameters(context, `select-item-container-${id}`, node)
     super(parameters)
 
     this.__actionSelect = actionSelect
@@ -20,6 +19,13 @@ export class ViewContainerSelectItem extends ViewContainer {
         this.__actionSelect.payloadBuilder().id(id).build()
       )
     })
-    this.__view = this.addView(new ViewSelectItem(this, node))
+    this.__view = this.addView(new ViewSelectItem(this, id))
+  }
+
+  /**
+   * @return {Element}
+   */
+  getNode(){
+    return this.__view.getNode()
   }
 }

@@ -12,7 +12,14 @@ export class ComponentSelectItemPublic {
     this[__component] = component
   }
 
-  actionSelect(onDeleteItem) {
+  /**
+   * @return {ActionDispatcher<ActionSelect, ActionSelectBuilder>}
+   */
+  actionSelect() {
     return this[__component].actionSelect()
+  }
+
+  remove(){
+    this[__component].remove()
   }
 }
