@@ -28,7 +28,7 @@ export class ViewSelectItem extends View {
 
   template() {
     return this.html(
-      e(`div#${this.__id}`)
+      e(`div#${this.__nodeId}`)
         .listenEvent(
           UIEventBuilder
             .mouseEvent()

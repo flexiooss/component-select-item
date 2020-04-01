@@ -9,6 +9,6 @@ export class ViewContainerSelectItemBuilder {
    * @return {ViewContainerSelectItem}
    */
   build(context, node, action, item){
-    return new ViewContainerSelectItem(this.__context, node, this.actionSelect(), item)
+    return new ViewContainerSelectItem(context, node, action, item)
   }
 }

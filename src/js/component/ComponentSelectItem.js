@@ -41,7 +41,7 @@ export class ComponentSelectItem {
   __setup() {
     this.__componentList.onCreateItem(items => {
       const nodes = []
-      for (let item of items.elements) {
+      for (let item of items.elements()) {
         const node = this.__componentList.nodeByID(item)
         const viewContainer = this.__viewContainerSelectItemBuilder.build(this.__context, node, this.actionSelect(), item)
         viewContainer.renderAndMount()

@@ -14,18 +14,23 @@ export class ViewContainerSelectItem extends ViewContainer {
 
     this.__actionSelect = actionSelect
 
+    this.__view = this.addView(new ViewSelectItem(this, id))
+
+    this.__listen()
+  }
+
+  __listen() {
     this.__view.on().selectItem(id => {
       this.__actionSelect.dispatch(
         this.__actionSelect.payloadBuilder().id(id).build()
       )
     })
-    this.__view = this.addView(new ViewSelectItem(this, id))
   }
 
   /**
    * @return {Element}
    */
-  getNode(){
+  getNode() {
     return this.__view.getNode()
   }
 }
