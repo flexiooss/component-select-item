@@ -9,8 +9,9 @@ const select = ComponentSuggestionCartoBuilder.builder()
   .parentNode(node)
   .storeItems(store)
   .viewListHandlerMounter(new ViewListHandlerMounter())
-  .onCreateItems((context, nodes) => {
-    nodes.forEach(node =>{
+  .onCreateItems((context, ids) => {
+    ids.forEach(id => {
+    const node = select.getNodeById(id)
       createViewContainer(context, node)
         ... DO INTELLIGENT THINGS ...
     })
