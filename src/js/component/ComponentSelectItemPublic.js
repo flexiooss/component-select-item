@@ -19,6 +19,14 @@ export class ComponentSelectItemPublic {
     return this[__component].actionSelect()
   }
 
+  /**
+   * @param {string} id
+   * @return {Element}
+   */
+  getNodeById(id) {
+    return this[__component].getNodeById(id)
+  }
+
   remove(){
     this[__component].remove()
   }

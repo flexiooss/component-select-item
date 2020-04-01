@@ -40,15 +40,13 @@ export class ComponentSelectItem {
 
   __setup() {
     this.__componentList.onCreateItem(items => {
-      const nodes = []
       for (let item of items.elements()) {
         const node = this.__componentList.nodeByID(item)
         const viewContainer = this.__viewContainerSelectItemBuilder.build(this.__context, node, this.actionSelect(), item)
         viewContainer.renderAndMount()
         this.__itemViewContainers.set(item, viewContainer)
-        nodes.push(viewContainer.getNode())
       }
-      this.__onCreateItems(this.__context, nodes)
+      this.__onCreateItems(this.__context, items)
     })
 
     this.__componentList.onDeleteItem(items => {
@@ -69,7 +67,7 @@ export class ComponentSelectItem {
   }
 
   /**
-   * @param {Function(ComponentContext, Element[])} onCreateItems
+   * @param {Function(ComponentContext, string[])} onCreateItems
    */
   onCreateItems(onCreateItems) {
     this.__onCreateItems = onCreateItems
@@ -77,5 +75,13 @@ export class ComponentSelectItem {
 
   remove() {
     this.__context.remove()
+  }
+
+  /**
+   * @param {string} id
+   * @return {Element}
+   */
+  getNodeById(id) {
+    return this.__itemViewContainers.get(id).getNode()
   }
 }
