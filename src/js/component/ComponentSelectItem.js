@@ -1,20 +1,19 @@
 import {ActionsHandler} from './ActionsHandler'
 import {ComponentListHandlerBuilder} from '@flexio-oss/component-list-handler/src/js/component/ComponentListHandlerBuilder'
-import {ViewContainerSelectItem} from '../view/ViewContainerSelectItem'
 
 export class ComponentSelectItem {
   /**
    * @param {HotBalloonApplication} application
    * @param {Element} parentNode
-   * @param {ProxyStore<STORE_TYPE, STORE_TYPE_BUILDER, ItemCollection, ItemCollectionBuilder>} proxyStoreItems
+   * @param {StoreInterface<ItemCollection, ItemCollectionBuilder>} storeItems
    * @param {ViewListHandlerMounter} viewListHandlerMounter
    * @param {Function(ComponentContext, Element[])} onCreateItems
    * @param {ViewContainerSelectItemBuilder} viewContainerSelectItemBuilder
    */
-  constructor(application, parentNode, proxyStoreItems, viewListHandlerMounter, onCreateItems, viewContainerSelectItemBuilder) {
+  constructor(application, parentNode, storeItems, viewListHandlerMounter, onCreateItems, viewContainerSelectItemBuilder) {
     this.__application = application
     this.__parentNode = parentNode
-    this.__proxyStoreItems = proxyStoreItems
+    this.__storeItems = storeItems
     this.__viewListHandlerMounter = viewListHandlerMounter
     this.__onCreateItems = onCreateItems
     this.__viewContainerSelectItemBuilder = viewContainerSelectItemBuilder
@@ -32,7 +31,7 @@ export class ComponentSelectItem {
     this.__componentList = new ComponentListHandlerBuilder()
       .application(this.__application)
       .parentNode(this.__parentNode)
-      .proxyStoreItems(this.__proxyStoreItems)
+      .storeItems(this.__storeItems)
       .idPrefix('select_item')
       .viewListHandlerMounter(this.__viewListHandlerMounter)
       .reconcile(false)

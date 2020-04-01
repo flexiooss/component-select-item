@@ -33,11 +33,11 @@ export class ComponentSelectItemBuilder {
   }
 
   /**
-   * @param {ProxyStore<STORE_TYPE, STORE_TYPE_BUILDER, ItemCollection, ItemCollectionBuilder>} proxyStoreItems
+   * @param {StoreInterface<ItemCollection, ItemCollectionBuilder>} storeItems
    * @returns {ComponentSelectItemBuilder}
    */
-  proxyStoreItems(proxyStoreItems) {
-    this.__proxyStoreItems = proxyStoreItems
+  storeItems(storeItems) {
+    this.__storeItems = storeItems
     return this
   }
 
@@ -77,7 +77,7 @@ export class ComponentSelectItemBuilder {
   build() {
     assertType(!isNull(this.__application), 'componentContext should be set')
     assertType(!isNull(this.__parentNode), 'parentNode should be set')
-    assertType(!isNull(this.__proxyStoreItems), 'proxyStoreItems should be set')
+    assertType(!isNull(this.__storeItems), 'storeItems should be set')
     assertType(!isNull(this.__viewListHandlerMounter), 'viewListHandlerMounter should be set')
     assertType(!isNull(this.__onCreateItems), 'onCreateItems should be set')
     assertType(!isNull(this.__viewContainerSelectItemBuilder), 'viewContainerSelectItemBuilder should be set')
@@ -86,7 +86,7 @@ export class ComponentSelectItemBuilder {
       new ComponentSelectItem(
         this.__application,
         this.__parentNode,
-        this.__proxyStoreItems,
+        this.__storeItems,
         this.__viewListHandlerMounter,
         this.__onCreateItems,
         this.__viewContainerSelectItemBuilder
