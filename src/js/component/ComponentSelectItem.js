@@ -46,7 +46,7 @@ export class ComponentSelectItem {
         viewContainer.renderAndMount()
         this.__itemViewContainers.set(item, viewContainer)
       }
-      this.__onCreateItems(this.__context, items)
+      this.__onCreateItems(this.__context, items.elements())
     })
 
     this.__componentList.onDeleteItem(items => {
